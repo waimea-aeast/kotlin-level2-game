@@ -12,29 +12,40 @@
  */
 
 val spaces = mutableListOf<String?>()
-
 fun main() {
     createSpaces()
     showSpaces()
 }
 
 fun createSpaces() {
-    for (i in 1..16){
+    for (i in 1..16) {
         spaces.add(" ")
+    }
+   while (true){
+        val whiteSpace = (0..15).random()
+        if (spaces[whiteSpace] == " ") {
+            spaces[whiteSpace] = "  o"
+            break
+        }
+    }
+    while (true){
+        val blackSpace = (0..15).random()
+        if (spaces[blackSpace] == " ") {
+            spaces[blackSpace] = "  x"
+            break
+        }
     }
 }
 
-//fix thgis next time
-fun showSpaces() {
-    for (i in 1..spaces.size) {
-        if (spaces < 10) {
-            print("    #$i   ")
-        }
-        else {
-            print("   #$i  ")
-        }
 
+//fix this next time
+fun showSpaces() {
+    for (i in 1..16) {
+        if (i < 10) print("    #$i   ")
+
+        else print("   #$i   ")
     }
+
     println()
     print("┌────────")
     print("┬────────".repeat(spaces.size-1))
@@ -49,3 +60,6 @@ fun showSpaces() {
     print("┴────────".repeat(spaces.size-1))
     println("┘")
 }
+
+
+
