@@ -16,7 +16,7 @@ fun main() {
     createSpaces()
     showSpaces()
 
-    var currentPlayer = "Player 1"
+    var currentPlayer = 1
 
     while (true) {
         println("\n$currentPlayer's turn")
@@ -36,6 +36,7 @@ fun main() {
         }
 
         showSpaces()
+        currentPlayer = if (currentPlayer == 1) 2 else 1
     }
 }
 
@@ -62,12 +63,10 @@ fun createSpaces() {
     }
 }
 
-
-
 fun showSpaces() {
+    //Prints square number and keeps spacing equal
     for (i in 1..16) {
         if (i < 10) print("    #$i   ")
-
         else print("   #$i   ")
     }
 
@@ -88,7 +87,35 @@ fun showSpaces() {
 }
 
 fun moveCounter() {
+    //What counter you're moving
+    print("Pick a position: ")
+    val from = readln().toInt() - 1
 
+    //Where you're moving it to
+    print("Move it to: ")
+    val to = readln().toInt() - 1
+
+    //Basic checks
+    if (from !in 0..15 || to !in 0..15) return
+    if (spaces[from] == " " || spaces[to] != " ") return
+
+    // only allow moving left
+    if (to >= from) {
+        println("You can only move left")
+        return
+    }
+
+    // check spaces in between
+    for (i in (to + 1)..(from - 1)) {
+        if (spaces[i] != " ") {
+            println("Blocked!")
+            return
+        }
+
+    // move piece
+    spaces[to] = spaces[from]
+    spaces[from] = " "
+}
 }
 
 fun removeCounter(): Boolean {
