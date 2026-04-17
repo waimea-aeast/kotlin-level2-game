@@ -31,7 +31,7 @@ This test checks whether a player can successfully move a counter to a valid emp
 Player selected a valid counter position (e.g. square 12) and moved it to a lower-numbered empty square (e.g. square 8). Both inputs were within the range 1–16. The path between the two positions was clear.
 ### Test Result
 
-![example.png](screenshots/example.png)
+![Test Move Counter.png](screenshots/Test Move Counter.png)
 
 Comment on test result. 
 The counter successfully moved from the starting position to the selected empty space. The original position was cleared, and the destination was updated correctly. The board displayed the updated state correctly after the move.
@@ -47,7 +47,7 @@ This test makes sure that the game correctly prevents a player from moving a cou
 Player attempted to move a counter from one square far out on the board to another square closer to the start. There was at least one counter located between these positions, blocking the path.
 ### Test Result
 
-![example.png](screenshots/example.png)
+![Test Blocked.png](screenshots/Test Blocked.png)
 
 Comment on test result. The program correctly detected the blocked path and displayed the message “Blocked!”. The move was not completed, and the board remained unchanged. This confirms that the collision detection logic is working correctly.
 
@@ -55,22 +55,65 @@ Comment on test result. The program correctly detected the blocked path and disp
 
 ---
 
-## Example Test Name
+## Invalid Empty Space Test
 
-Example test description. Example test description.Example test description. Example test description.Example test description. Example test description.
-
+This test checks whether the program prevents a player from selecting an empty space as the piece to move. This ensures players cannot waste turns by moving non-existent counters.
 ### Test Data Used
 
-Details of test data. Details of test data. Details of test data. Details of test data. Details of test data. Details of test data. Details of test data.
-
+Player selected a position that contained no counter (a blank space) as the starting position. A second valid position was also entered for the destination.
 ### Test Result
 
-![example.png](screenshots/example.png)
+![TestNoCounterThere.png](screenshots/TestNoCounterThere.png)
 
-Comment on test result. Comment on test result. Comment on test result. Comment on test result. Comment on test result. Comment on test result.
+Comment on test result. The program correctly identified that no piece existed in the selected position and displayed the message “No piece there”. The move was cancelled and the player was prompted to try again without losing their turn.
 
 ---
 
+---
+
+## Invalid Destination Test
+
+This test checks whether the program prevents a player from moving a counter into an already occupied space. This ensures that counters cannot overlap.
+### Test Data Used
+
+Player selected a valid counter position but attempted to move it onto another occupied square.
+### Test Result
+
+![TestCounterNonEmpty.png](screenshots/TestCounterNonEmpty.png)
+
+Comment on test result. The program correctly detected that the destination square was already occupied and displayed “Space is not empty”. The move was cancelled and the board state remained unchanged.
+
+---
+---
+
+## Win Condition Test
+
+This test ensures that the game correctly detects when the black counter ("x") is removed from square 1. This is the winning condition of the game.
+### Test Data Used
+
+The black counter was moved or positioned on square 1. The player then selected the option to remove the counter from square 1.
+### Test Result
+
+![TestWin.png](screenshots/TestWin.png)
+
+Comment on test result. The program correctly removed the black counter and immediately displayed the message showing the current player as the winner. The game loop ended successfully, confirming that win detection works as expected.
+
+---
+---
+
+## Turn Switching Test
+
+This test ensures that the game correctly alternates between Player 1 and Player 2 after each valid move or action.
+### Test Data Used
+
+Both players took turns performing valid moves and actions (move or remove counter).
+### Test Result
+
+![TestTurnSwitch.png](screenshots/TestTurnSwitch.png)
+
+Comment on test result. The game correctly switched between Player 1 and Player 2 after each completed turn. The current player was displayed clearly before each action, confirming that the turn system works correctly.
+
+---
 ---
 
 ## Example Test Name
