@@ -33,24 +33,36 @@ fun main() {
     var currentPlayer = player1
 
     while (true) {
-        println("\n$currentPlayer's turn")
+        println("$currentPlayer's turn")
 
-        println("Choose action:")
-        println("1. Move a counter")
-        println("2. Remove counter from square one")
+        var turnDone = false
 
-        when (readln()) {
-            "1" -> moveCounter()
-            "2" -> {
+        while (!turnDone) {
+            println("Choose action:")
+            println("1. Move a counter")
+            println("2. Remove counter from square one")
+
+            val choice = readln()
+
+            if (choice == "1") {
+                moveCounter()  
+                turnDone = true
+            }
+
+            else if (choice == "2") {
                 if (spaces[0] == " ") {
                     println("Nothing there")
-                    continue
                 }
-
-                if (removeCounter()) {
-                    println("$currentPlayer wins!")
-                    break
+                else {
+                    if (removeCounter()) {
+                        println("$currentPlayer wins!")
+                        return
+                    }
+                    turnDone = true
                 }
+            }
+            else {
+                println("Invalid choice")
             }
         }
 
@@ -107,54 +119,64 @@ fun showSpaces() {
 
 fun moveCounter() {
     while (true) {
-    //What counter you're moving
-    print("Pick a position: ")
-    val from = readln().toInt() - 1
+        print("Pick a position: ")
+        val fromInput = readln()
+        val fromNum = fromInput.toIntOrNull()
 
-    //Where you're moving it to
-    print("Move it to: ")
-    val to = readln().toInt() - 1
+        print("Move it to: ")
+        val toInput = readln()
+        val toNum = toInput.toIntOrNull()
 
-    //Basic checks
-    if (from !in 0..15 || to !in 0..15) continue
-
-
-    //Cant move to empty space
-    if (spaces[from] == " ") {
-        println("No piece there")
-        continue
-    }
-
-    //destination must be empty
-    if (spaces[to] != " ") {
-        println("Space is not empty")
-        continue
-    }
-
-    // only allow moving left
-    if (to >= from) {
-        println("You can only move left")
-        continue
-    }
-
-    // check spaces in between
-        var blocked = false
-    for (i in (to + 1)..(from - 1)) {
-        if (spaces[i] != " ") {
-            blocked = true
-        }
-    }
-        if (blocked) {
-            println("Blocked!")
+        // check if input is a number
+        if (fromNum == null || toNum == null) {
+            println("Please enter numbers only")
             continue
         }
 
-        // move piece
-        spaces[to] = spaces[from]
-        spaces[from] = " "
-        break
+        val from = fromNum - 1
+        val to = toNum - 1
+
+            //Basic checks
+            if (from !in 0..15 || to !in 0..15) continue
+
+
+            //Cant move to empty space
+            if (spaces[from] == " ") {
+                println("No piece there")
+                continue
+            }
+
+            //destination must be empty
+            if (spaces[to] != " ") {
+                println("Space is not empty")
+                continue
+            }
+
+            // only allow moving left
+            if (to >= from) {
+                println("You can only move left")
+                continue
+            }
+
+            // check spaces in between
+            var blocked = false
+            for (i in (to + 1)..(from - 1)) {
+                if (spaces[i] != " ") {
+                    blocked = true
+                }
+            }
+            if (blocked) {
+                println("Blocked!")
+                continue
+            }
+
+            // move piece
+            spaces[to] = spaces[from]
+            spaces[from] = " "
+            break
+        }
     }
-}
+
 
 
 fun removeCounter(): Boolean {
