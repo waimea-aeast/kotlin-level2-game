@@ -14,6 +14,9 @@
 val spaces = mutableListOf<String?>()
 fun main() {
 
+    println("====== PINNED =======")
+    println()
+
     println("=== GAME INSTRUCTIONS ===")
     println("Move counters to the left.")
     println("You cannot jump over other counters.")
