@@ -19,7 +19,7 @@ fun main() {
     println("You cannot jump over other counters.")
     println("You can remove a counter from square 1.")
     println("Whoever removes the BLACK (x) counter wins.")
-    println("=========================\n")
+    println("=========================")
 
     print("Enter Player 1 name: ")
     val player1 = readln()
@@ -35,34 +35,22 @@ fun main() {
     while (true) {
         println("$currentPlayer's turn")
 
-        var turnDone = false
+        println("Choose action:")
+        println("1. Move a counter")
+        println("2. Remove counter from square one")
 
-        while (!turnDone) {
-            println("Choose action:")
-            println("1. Move a counter")
-            println("2. Remove counter from square one")
-
-            val choice = readln()
-
-            if (choice == "1") {
-                moveCounter()  
-                turnDone = true
-            }
-
-            else if (choice == "2") {
+        when (readln()) {
+            "1" -> moveCounter()
+            "2" -> {
                 if (spaces[0] == " ") {
                     println("Nothing there")
+                    continue
                 }
-                else {
-                    if (removeCounter()) {
-                        println("$currentPlayer wins!")
-                        return
-                    }
-                    turnDone = true
+
+                if (removeCounter()) {
+                    println("$currentPlayer wins!")
+                    break
                 }
-            }
-            else {
-                println("Invalid choice")
             }
         }
 
@@ -75,7 +63,7 @@ fun createSpaces() {
     for (i in 1..16) {
         spaces.add(" ")
     }
-    //place 4 white counters
+    //places 4 white counters
     repeat(4){
         while (true) {
             val whiteSpace = (0..15).random()
@@ -119,64 +107,54 @@ fun showSpaces() {
 
 fun moveCounter() {
     while (true) {
-        print("Pick a position: ")
-        val fromInput = readln()
-        val fromNum = fromInput.toIntOrNull()
+    //What counter you're moving
+    print("Pick a position: ")
+    val moveFrom = readln().toInt() - 1
 
-        print("Move it to: ")
-        val toInput = readln()
-        val toNum = toInput.toIntOrNull()
+    //Where you're moving it to
+    print("Move it to: ")
+    val moveTo = readln().toInt() - 1
 
-        // check if input is a number
-        if (fromNum == null || toNum == null) {
-            println("Please enter numbers only")
+    //Basic checks
+    if (moveFrom !in 0..15 || moveTo !in 0..15) continue
+
+
+    //Cant move to empty space
+    if (spaces[moveFrom] == " ") {
+        println("No piece there")
+        continue
+    }
+
+    //destination must be empty
+    if (spaces[moveTo] != " ") {
+        println("Space is not empty")
+        continue
+    }
+
+    // only allows moving left
+    if (moveTo >= moveFrom) {
+        println("You can only move left")
+        continue
+    }
+
+    // checks spaces in between
+        var blocked = false
+    for (i in (moveTo + 1)..(moveFrom - 1)) {
+        if (spaces[i] != " ") {
+            blocked = true
+        }
+    }
+        if (blocked) {
+            println("Blocked!")
             continue
         }
 
-        val from = fromNum - 1
-        val to = toNum - 1
-
-            //Basic checks
-            if (from !in 0..15 || to !in 0..15) continue
-
-
-            //Cant move to empty space
-            if (spaces[from] == " ") {
-                println("No piece there")
-                continue
-            }
-
-            //destination must be empty
-            if (spaces[to] != " ") {
-                println("Space is not empty")
-                continue
-            }
-
-            // only allow moving left
-            if (to >= from) {
-                println("You can only move left")
-                continue
-            }
-
-            // check spaces in between
-            var blocked = false
-            for (i in (to + 1)..(from - 1)) {
-                if (spaces[i] != " ") {
-                    blocked = true
-                }
-            }
-            if (blocked) {
-                println("Blocked!")
-                continue
-            }
-
-            // move piece
-            spaces[to] = spaces[from]
-            spaces[from] = " "
-            break
-        }
+        // move piece
+        spaces[moveTo] = spaces[moveFrom]
+        spaces[moveFrom] = " "
+        break
     }
-
+}
 
 
 fun removeCounter(): Boolean {
