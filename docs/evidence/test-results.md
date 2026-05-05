@@ -4,7 +4,7 @@ The test results show the actual outcome of the testing, following the [Test Pla
 
 ---
 
-## List displaying correctly
+## List displaying correctly - GAMEPLAY
 
 The list which contains the counters displays correctly with no inaccuracies.
 
@@ -23,7 +23,7 @@ It correctly displayed the counters, space numbers, and space borders.
 
 ---
 
-## Valid Move
+## Valid Move - VALID
 
 This test checks whether a player can successfully move a counter to a valid empty space following the rules of the game. The move must be within the board limits, must not jump over other counters, and must move into an empty space.
 ### Test Data Used
@@ -39,7 +39,7 @@ The counter successfully moved from the starting position to the selected empty 
 
 ---
 
-## Blocked move test
+## Blocked move test - INVALID
 
 This test makes sure that the game correctly prevents a player from moving a counter through another counter. According to the rules, counters cannot jump over other counters, so any blocked path should stop the move from happening.
 ### Test Data Used
@@ -55,7 +55,7 @@ Comment on test result. The program correctly detected the blocked path and disp
 
 ---
 
-## Invalid Empty Space Test
+## Invalid Empty Space Test - INVALID
 
 This test checks whether the program prevents a player from selecting an empty space as the piece to move. This ensures players cannot waste turns by moving non-existent counters.
 ### Test Data Used
@@ -71,7 +71,7 @@ Comment on test result. The program correctly identified that no piece existed i
 
 ---
 
-## Invalid Destination Test
+## Invalid Destination Test - INVALID
 
 This test checks whether the program prevents a player from moving a counter into an already occupied space. This ensures that counters cannot overlap.
 ### Test Data Used
@@ -86,7 +86,7 @@ Comment on test result. The program correctly detected that the destination squa
 ---
 ---
 
-## Win Condition Test
+## Win Condition Test - GAMEPLAY
 
 This test ensures that the game correctly detects when the black counter ("x") is removed from square 1. This is the winning condition of the game.
 ### Test Data Used
@@ -101,7 +101,7 @@ Comment on test result. The program correctly removed the black counter and imme
 ---
 ---
 
-## Turn Switching Test
+## Turn Switching Test - GAMEPLAY
 
 This test ensures that the game correctly alternates between Player 1 and Player 2 after each valid move or action.
 ### Test Data Used
@@ -112,6 +112,40 @@ Both players took turns performing valid moves and actions (move or remove count
 ![TestTurnSwitch.png](screenshots/TestTurnSwitch.png)
 
 Comment on test result. The game correctly switched between Player 1 and Player 2 after each completed turn. The current player was displayed clearly before each action, confirming that the turn system works correctly.
+
+---
+---
+
+## Removal of counter from square 1 - BOUNDARY
+
+This test ensures that you can correctly remove a counter from square 1 with no boundary errors.
+
+### Test Data Used
+
+A player chooses the option to remove a counter from square 1.
+
+### Test Result
+
+![TestRemove.png](screenshots/TestRemove.png)
+
+The Code correctly removes the counter from square 1 upon the request. There is no error surrounding the boundary and the code works as expected.
+
+---
+---
+
+## Moving counter from square 16 - BOUNDARY
+
+This test makes sure that its possible to move a counter off of square 16 with no errors.
+
+### Test Data Used
+
+The player picks the counter on square 16 to move and places it in a valid position.
+
+### Test Result
+
+![TestBoundary16.png](screenshots/TestBoundary16.png)
+
+The code works as expected with no errors. It moves the counter off of square 16 to 15.
 
 ---
 ---
@@ -131,4 +165,5 @@ Details of test data. Details of test data. Details of test data. Details of tes
 Comment on test result. Comment on test result. Comment on test result. Comment on test result. Comment on test result. Comment on test result.
 
 ---
+
 
