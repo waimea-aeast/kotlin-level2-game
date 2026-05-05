@@ -7,7 +7,7 @@
  * GitHub Repo:    https://github.com/waimea-aeast/kotlin-level2-game
  * ---------------------------------------------------------------------
  * Notes:
- * PROJECT NOTES HERE
+ * Fix code not taking null answers
  * =====================================================================
  */
 
