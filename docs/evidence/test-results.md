@@ -150,19 +150,17 @@ The code works as expected with no errors. It moves the counter off of square 16
 ---
 ---
 
-## Example Test Name
+## Just Beyond Boundary Test - INVALID
 
-Example test description. Example test description.Example test description. Example test description.Example test description. Example test description.
-
+This test makes sure that you can't enter a number just beyond the boundary and have it still work.
 ### Test Data Used
 
-Details of test data. Details of test data. Details of test data. Details of test data. Details of test data. Details of test data. Details of test data.
-
+One of the players selects a value of either 0 or 17 and checks if it gives you the correct message in that it doesn't work.
 ### Test Result
 
-![example.png](screenshots/example.png)
+![TestBeyondBoundary.png](screenshots/TestBeyondBoundary.png)
 
-Comment on test result. Comment on test result. Comment on test result. Comment on test result. Comment on test result. Comment on test result.
+The code does as expected and gives the player a message stating that they need to enter a number between 1 and 16 to ensure that the code doesnt mess up and take inputs beyond the boundaries.
 
 ---
 
